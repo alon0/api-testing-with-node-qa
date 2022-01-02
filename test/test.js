@@ -1,6 +1,7 @@
+require('dotenv').config()
 var should = require('chai').should(),
     supertest = require('supertest'),
-    api = supertest('http://localhost:5000');
+    api = supertest(process.env.BACKEND_API || 'http://localhost:5000');
 
 describe('Authentication', function() {
 

@@ -16,6 +16,7 @@ app.configure('development', function(){
 
 app.all('/*', function(req, res, next) {
   //IRL, lookup in a database or something
+  console.log("all API method was invoked")
   if (typeof req.headers['x-api-key'] !== 'undefined' && req.headers['x-api-key'] === '123myapikey') {
     next();
   } else {
@@ -24,6 +25,7 @@ app.all('/*', function(req, res, next) {
 });
 
 app.get('/blog', express.basicAuth('correct', 'credentials'), function(req, res) {
+  console.log("/blog API method was invoked")
   res.send({posts:['one post', 'two post']});
 });
 
