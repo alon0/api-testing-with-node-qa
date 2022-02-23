@@ -42,7 +42,7 @@ pipeline {
       steps {
         container('test') {
           sh '''
-            export BACKEND_API=${params.BACKEND_API}
+            export BACKEND_API=${BACKEND_API}
             npm install -g mocha chai
             npm test
           '''
@@ -60,13 +60,14 @@ pipeline {
             echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
             docker push alon0/devops-proj:stable-${GIT_COMMIT_SHORT}
           ''' 
-            }
         }
-    }
-  post {
-    success {
-        echo 'QA Passed'
-        // build job: 'api-testing-with-node-qa', parameters: [string(name: 'BACKEND_API', value: '${BACKEND_API}')]
+      }
     }
   }
+  // post {
+  //   success {
+  //       echo 'QA Passed'
+  //       // build job: 'api-testing-with-node-qa', parameters: [string(name: 'BACKEND_API', value: '${BACKEND_API}')]
+  //   }
+  // }
 }
