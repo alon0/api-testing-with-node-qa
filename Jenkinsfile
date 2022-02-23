@@ -44,7 +44,7 @@ pipeline {
           sh '''
             export BACKEND_API=${BACKEND_API}
             npm install -g mocha chai
-            make test
+            npm test
           '''
         }
       }
