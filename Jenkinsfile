@@ -55,7 +55,7 @@ pipeline {
         container('docker') {
           git credentialsId: 'git',
               branch: '${GIT_COMMIT_SHORT}',
-              url: 'git@github.com:alon0/DevOps-proj.git' 
+              url: 'git@github.com:alon0/api-testing-with-node.git' 
           sh '''
             docker build -t alon0/devops-proj:stable-${GIT_COMMIT_SHORT} .
             echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
