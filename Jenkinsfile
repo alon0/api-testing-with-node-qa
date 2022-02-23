@@ -42,7 +42,7 @@ pipeline {
       steps {
         container('test') {
           sh '''
-            export BACKEND_API=${BACKEND_API}
+            export BACKEND_API=${params.BACKEND_API}
             npm install -g mocha chai
             npm test
           '''
