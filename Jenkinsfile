@@ -53,9 +53,10 @@ pipeline {
     stage('Promote to Stable') {
       steps {
         container('docker') {
-          git credentialsId: 'git',
-              branch: '${GIT_COMMIT_SHORT}',
-              url: 'git@github.com:alon0/api-testing-with-node.git' 
+          checkout([$class: 'GitSCM', branches: [[name: '${GIT_COMMIT_SHORT}']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'git@github.com:alon0/api-testing-with-node.git']]])
+          // git credentialsId: 'git',
+          //     branch: '${GIT_COMMIT_SHORT}',
+          //     url: 'git@github.com:alon0/api-testing-with-node.git' 
           sh '''
             docker build -t alon0/devops-proj:stable-${GIT_COMMIT_SHORT} .
             echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
